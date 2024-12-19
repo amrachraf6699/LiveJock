@@ -11,9 +11,22 @@ class ChannelsController extends Controller
 {
     public function index()
     {
-        $channels = Channel::all();
+        $channels = Channel::paginate(10);
 
-        return SendResponse(200, 'Channels retrieved successfully.', ChannelsResource::collection($channels));
+        return SendResponse(200,
+        'Channels retrieved successfully.',
+        [
+            'pagination' => [
+                'total' => $channels->total(),
+                'from' => $channels->firstItem(),
+                'to' => $channels->lastItem(),
+                'next_page' => $channels->nextPageUrl(),
+                'prev_page' => $channels->previousPageUrl(),
+                'first_page' => $channels->url(1),
+                'last_page' => $channels->url($channels->lastPage())
+            ],
+            'data' => ChannelsResource::collection($channels),
+        ]);
     }
 
     public function show(Channel $channel)

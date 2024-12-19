@@ -42,86 +42,86 @@ class Handler extends ExceptionHandler
      * @param \Throwable $exception
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    // public function render($request, Throwable $exception)
-    // {
-    //     if ($request->expectsJson()) {
-    //         return $this->handleApiException($request, $exception);
-    //     }
+    public function render($request, Throwable $exception)
+    {
+        if ($request->expectsJson()) {
+            return $this->handleApiException($request, $exception);
+        }
 
-    //     return parent::render($request, $exception);
-    // }
+        return parent::render($request, $exception);
+    }
 
-    // /**
-    //  * Handle API-specific exception formatting.
-    //  *
-    //  * @param \Illuminate\Http\Request $request
-    //  * @param \Throwable $exception
-    //  * @return JsonResponse
-    //  */
-    // protected function handleApiException($request, Throwable $exception): JsonResponse
-    // {
-    //     $statusCode = $this->getStatusCode($exception);
-    //     $message = $this->getFriendlyMessage($exception);
+    /**
+     * Handle API-specific exception formatting.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \Throwable $exception
+     * @return JsonResponse
+     */
+    protected function handleApiException($request, Throwable $exception): JsonResponse
+    {
+        $statusCode = $this->getStatusCode($exception);
+        $message = $this->getFriendlyMessage($exception);
 
-    //     // Use SendResponse helper to format the API response
-    //     return SendResponse($statusCode, $message);
-    // }
+        // Use SendResponse helper to format the API response
+        return SendResponse($statusCode, $message);
+    }
 
-    // /**
-    //  * Get the appropriate status code for the exception.
-    //  *
-    //  * @param Throwable $exception
-    //  * @return int
-    //  */
-    // protected function getStatusCode(Throwable $exception): int
-    // {
-    //     if ($exception instanceof ValidationException) {
-    //         return 422;
-    //     }
+    /**
+     * Get the appropriate status code for the exception.
+     *
+     * @param Throwable $exception
+     * @return int
+     */
+    protected function getStatusCode(Throwable $exception): int
+    {
+        if ($exception instanceof ValidationException) {
+            return 422;
+        }
 
-    //     if ($exception instanceof AuthenticationException) {
-    //         return 401;
-    //     }
+        if ($exception instanceof AuthenticationException) {
+            return 401;
+        }
 
-    //     if ($exception instanceof AuthorizationException) {
-    //         return 403;
-    //     }
+        if ($exception instanceof AuthorizationException) {
+            return 403;
+        }
 
-    //     if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-    //         return 404;
-    //     }
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            return 404;
+        }
 
-    //     if ($exception instanceof HttpException) {
-    //         return $exception->getStatusCode();
-    //     }
+        if ($exception instanceof HttpException) {
+            return $exception->getStatusCode();
+        }
 
-    //     // return 500;
-    // }
+        // return 500;
+    }
 
-    // /**
-    //  * Get a user-friendly error message for the exception.
-    //  *
-    //  * @param Throwable $exception
-    //  * @return string
-    //  */
-    // protected function getFriendlyMessage(Throwable $exception): string
-    // {
-    //     if ($exception instanceof ValidationException) {
-    //         return 'Validation error. Please check your input.';
-    //     }
+    /**
+     * Get a user-friendly error message for the exception.
+     *
+     * @param Throwable $exception
+     * @return string
+     */
+    protected function getFriendlyMessage(Throwable $exception): string
+    {
+        if ($exception instanceof ValidationException) {
+            return 'Validation error. Please check your input.';
+        }
 
-    //     if ($exception instanceof AuthenticationException) {
-    //         return 'Unauthenticated. Please log in.';
-    //     }
+        if ($exception instanceof AuthenticationException) {
+            return 'Unauthenticated. Please log in.';
+        }
 
-    //     if ($exception instanceof AuthorizationException) {
-    //         return 'Unauthorized action.';
-    //     }
+        if ($exception instanceof AuthorizationException) {
+            return 'Unauthorized action.';
+        }
 
-    //     if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
-    //         return 'The requested resource was not found.';
-    //     }
+        if ($exception instanceof ModelNotFoundException || $exception instanceof NotFoundHttpException) {
+            return 'The requested resource was not found.';
+        }
 
-    //     return 'An unexpected error occurred. Please try again later.';
-    // }
+        return 'An unexpected error occurred. Please try again later.';
+    }
 }

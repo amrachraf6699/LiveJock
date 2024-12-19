@@ -13,14 +13,30 @@ class ProgramsController extends Controller
 {
     public function index()
     {
-        $programs = Program::all();
+        $programs = Program::paginate(10);
 
-        return SendResponse(200, 'Programs retrieved successfully.', ProgramsResource::collection($programs));
+        return SendResponse(
+            200,
+             'Programs retrieved successfully.',
+             [
+                'pagination' =>
+                [
+                    'total' => $programs->total(),
+                    'from' => $programs->firstItem(),
+                    'to' => $programs->lastItem(),
+                    'next_page' => $programs->nextPageUrl(),
+                    'prev_page' => $programs->previousPageUrl(),
+                    'first_page' => $programs->url(1),
+                    'last_page' => $programs->url($programs->lastPage())
+                ],
+                'data' => ProgramsResource::collection($programs)
+             ]
+            );
     }
 
     public function show(Program $program)
     {
-        $program->load('episodes');
+        $program->setRelation('episodes', $program->episodes()->paginate(10));
 
         return SendResponse(200, 'Program retrieved successfully.', new ProgramsResource($program));
     }

@@ -63,6 +63,8 @@ class ProgramResource extends Resource
                                         ->acceptedFileTypes(['video/*'])
                                         ->disk('public_storage')
                                         ->directory('videos/episodes')
+                                        ->visibility('public')
+                                        ->fetchFileInformation(false)
                                         ->required()
                                         ->label('Video File'),
                                 ])

@@ -18,7 +18,6 @@ class RegisterController extends Controller
 
         $token = $user->createToken('from_register')->plainTextToken;
 
-        return SendResponse(201, 'Welcome to ' . env('APP_NAME') . '!', ['token' => $token]
-        );
+        return SendResponse(201, 'Welcome to ' . env('APP_NAME') . '!', ['token' => $token]);
     }
 }

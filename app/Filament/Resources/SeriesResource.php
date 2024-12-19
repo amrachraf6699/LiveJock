@@ -28,21 +28,55 @@ class SeriesResource extends Resource
                         Forms\Components\TextInput::make('name')
                             ->label('Name')
                             ->required()
-                            ->unique()
+                            ->unique(ignoreRecord: true)
                             ->maxLength(255),
-                    ])
-                    ->columns(1),
-                Forms\Components\Card::make()
-                    ->schema([
                         Forms\Components\FileUpload::make('cover')
                             ->acceptedFileTypes(['image/*'])
                             ->required()
                             ->disk('public_storage')
-                            ->directory('images/serieses')
+                            ->directory('images/programs')
                             ->image()
                             ->label('Cover'),
                     ])
                     ->columns(1),
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Repeater::make('episodes')
+                        ->relationship('episodes')
+                        ->schema([
+                            Forms\Components\TextInput::make('title')
+                                ->label('Episode Title')
+                                ->required()
+                                ->columnSpan('full'),
+
+                            Forms\Components\Section::make('Media')
+                                ->schema([
+                                    Forms\Components\FileUpload::make('cover')
+                                        ->acceptedFileTypes(['image/*'])
+                                        ->disk('public_storage')
+                                        ->directory('images/seireses')
+                                        ->image()
+                                        ->label('Episode Cover'),
+
+                                    Forms\Components\FileUpload::make('video_url')
+                                    ->label('Video')
+                                        ->acceptedFileTypes(['video/*'])
+                                        ->disk('public_storage')
+                                        ->directory('videos/episodes')
+                                        ->visibility('public')
+                                        ->fetchFileInformation(false)
+                                        ->required()
+                                        ->label('Video File'),
+                                ])
+                                ->columns(2)
+                                ->collapsible()
+                                ->collapsed(),
+                        ])
+                        ->createItemButtonLabel('Add Episode')
+                        ->columns(1),
+                    ])
+                    ->columns(1)
+                    ->label('Manage Episode'),
             ]);
     }
 

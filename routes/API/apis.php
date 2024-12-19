@@ -1,10 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\AboutController;
-use App\Http\Controllers\API\ChannelsController;
-use App\Http\Controllers\API\NewsController;
-use App\Http\Controllers\API\ProgramsController;
-use App\Http\Controllers\API\SeriesesController;
+use App\Http\Controllers\API\{AboutController, ChannelsController, HomeController, NewsController, ProgramsController, SeriesesController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +16,10 @@ use Illuminate\Support\Facades\Route;
 
 //About Endpoint
 Route::get('about', AboutController::class);
+
+//Home Endpoint
+Route::get('home', HomeController::class);
+
 //Channels
 Route::get('channels', [ChannelsController::class, 'index']);
 Route::get('channels/{channel:slug}', [ChannelsController::class, 'show'])->name('channels.show');

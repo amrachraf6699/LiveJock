@@ -19,19 +19,29 @@ class AboutResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-cog';
 
-    protected static ?string $navigationLabel = 'Website Settings';
+    protected static ?string $activeNavigationIcon = 'heroicon-o-chevron-double-right';
 
-    protected static ?string $pluralLabel = 'Website Settings';
+
+    public static function getNavigationLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Website Settings' : 'إعدادات الموقع';
+    }
+
+    public static function getpluralLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Website Settings' : 'إعدادات الموقع';
+    }
 
     public static function getPluralModelLabel(): string
     {
-        return 'Website Settings';
+        return app()->getLocale() === 'en' ? 'Website Settings' : 'إعدادات الموقع';
     }
 
     public static function getModelLabel(): string
     {
-        return 'Website Settings';
+        return app()->getLocale() === 'en' ? 'Website Setting' : 'إعدادات الموقع';
     }
+
 
     public static function canCreate(): bool
     {

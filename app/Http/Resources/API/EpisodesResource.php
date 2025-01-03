@@ -19,12 +19,8 @@ class EpisodesResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'cover' => asset('storage/' . $this->cover),
+            'video_url' => asset('storage/' . $this->video_url),
         ];
-
-        if ($request->routeIs('episodes.show'))
-        {
-            $data['video_url'] = asset('storage/' . $this->video_url);
-        }
 
         return $data;
     }

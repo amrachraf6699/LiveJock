@@ -1,0 +1,124 @@
+/* استيراد خط Cairo */
+/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap'); */
+
+/* تعريف ألوان المتغيرات */
+:root {
+    --main-color: #2c2d31;
+    --second-color: #1d212c;
+    --hover-color: rgb(219 162 53 / var(--tw-text-opacity, 1));
+    --golden-color: rgb(219 162 53 / var(--tw-bg-opacity, 1));
+    --main-color-dark: #151618;
+    --light-color: #009786;
+    --more-lighter-color: #2a807f;
+}
+
+/* تطبيق الخط الافتراضي */
+body {
+    background-color: var(--main-color);
+    color: white;
+    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo */
+}
+
+/* Navbar */
+.navbar {
+    background-color: var(--main-color);
+}
+
+.navbar-item:hover {
+    color: var(--hover-color);
+}
+
+.navbar-item .active {
+    color: var(--hover-color);
+}
+
+.navbar-item .active:hover {
+    color: white;
+}
+
+/* Main Image */
+.main-image-overlay {
+    background: linear-gradient(0deg, var(--main-color), var(--more-lighter-color));
+}
+
+/* Button */
+.btn-primary {
+    background-color: var(--light-color);
+    color: white;
+    font-family: 'Cairo', sans-serif; /* تطبيق الخط على الأزرار */
+}
+
+.btn-primary:hover {
+    background-color: var(--main-color);
+}
+
+/* Text Shadow for Depth */
+.text-shadow-md {
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Shadow effect on the button */
+.hover\:shadow-2xl:hover {
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* تخصيص شريط التمرير */
+.custom-scrollbar {
+    overflow-x: auto; /* تمكين التمرير الأفقي */
+    scrollbar-width: thin; /* لتغيير عرض الشريط في المتصفحات الحديثة */
+    scrollbar-color: var(--main-color-dark) var(--second-color); /* لتغيير لون الشريط */
+    padding-top: 10px; /* مسافة من الأعلى */
+}
+
+/* تخصيص شريط التمرير في متصفحات Webkit مثل Chrome */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 10px; /* عرض الشريط */
+    height: 8px; /* ارتفاع الشريط في حالة التمرير العمودي */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--main-color-dark); /* لون الشريط */
+    border-radius: 10px; /* حواف مستديرة */
+    border: 2px solid #2c3e50; /* إضافة حد للشريط */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #2c3e50; /* لون الشريط عند التحويل */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background-color: #2c3e50; /* لون الخلفية للشريط */
+    border-radius: 10px;
+}
+
+/* Movie Card */
+.movie-card {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    font-family: 'Cairo', sans-serif; /* تطبيق الخط على بطاقات الأفلام */
+}
+
+.movie-card:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    background-color: rgba(219, 162, 53, 0.2); /* نفس اللون لكن مع تقليل الشفافية */
+}
+
+.movie-card .overlay {
+    transition: opacity 0.3s ease;
+}
+
+.movie-card:hover .overlay {
+    opacity: 1;
+}
+
+.movie-card .button {
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    font-family: 'Cairo', sans-serif; /* تطبيق الخط على الأزرار */
+}
+
+.movie-card:hover .button {
+    opacity: 1;
+    transform: scale(1.05);
+}

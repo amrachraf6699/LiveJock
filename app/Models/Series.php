@@ -10,6 +10,8 @@ class Series extends Model
     use HasFactory;
 
     protected $guarded = [];
+    protected $appends = ['cover_url'];
+
 
 
     protected static function boot()

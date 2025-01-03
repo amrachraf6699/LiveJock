@@ -11,6 +11,9 @@ class Program extends Model
 
     protected $guarded = [];
 
+    protected $appends = ['cover_url'];
+
+
     protected static function boot()
     {
         parent::boot();

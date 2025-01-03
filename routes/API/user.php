@@ -14,7 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Profile
 Route::get('',[ProfileController::class,'index']);
 Route::post('update-profile' , [ProfileController::class,'update']);
 Route::post('change-password' , [ProfileController::class,'changePassword']);
 Route::delete('delete-account' , [ProfileController::class,'deleteAccount']);
+
+//Logout
+Route::get('sessions' , [ProfileController::class,'sessions']);
+Route::post('logout' , [ProfileController::class,'logout']);
+Route::post('logout-all' , [ProfileController::class,'logoutAll']);
+
+//Notifications
+Route::get('notifications', [ProfileController::class , 'notifications']);
+Route::get('notifications/{notification}', [ProfileController::class , 'notification'])->name('notification');
+

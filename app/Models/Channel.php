@@ -8,6 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Channel extends Model
 {
     use HasFactory;
+    
+    protected $guarded = [];
+
+    protected $appends = ['cover_url'];
+
+
+
 
     protected static function boot()
     {
@@ -20,10 +27,13 @@ class Channel extends Model
         });
     }
 
-    protected $guarded = [];
-
 
     public function getLogoUrlAttribute()
+    {
+        return asset('storage/' .  $this->attributes['logo']);
+    }
+
+    public function getCoverUrlAttribute()
     {
         return asset('storage/' .  $this->attributes['logo']);
     }

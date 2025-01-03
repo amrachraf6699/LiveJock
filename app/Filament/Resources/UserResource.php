@@ -19,6 +19,48 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+
+
+    protected static ?string $activeNavigationIcon = 'heroicon-o-chevron-double-right';
+
+
+    public static function getNavigationLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المستخدمين';
+    }
+
+    public static function getpluralLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المستخدمين';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المستخدمين';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'User' : 'مستخدم';
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return app()->getLocale() === 'en' ? 'Users Section' : 'قسم المستخدمين';
+    }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'success' : 'danger';
+    }
+
+
+
     public static function form(Form $form): Form
     {
         return $form

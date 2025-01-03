@@ -17,7 +17,45 @@ class SeriesResource extends Resource
 {
     protected static ?string $model = Series::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-film';
+    protected static ?string $navigationIcon = 'heroicon-o-video-camera';
+
+    protected static ?string $activeNavigationIcon = 'heroicon-o-chevron-double-right';
+
+    public static function getNavigationLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المسلسلات';
+    }
+
+    public static function getpluralLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المسلسلات';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Serieses' : 'المسلسلات';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Series' : 'مسلسل';
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return app()->getLocale() === 'en' ? 'Media Section' : 'القسم الإعلامي';
+    }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'success' : 'danger';
+    }
+
 
     public static function form(Form $form): Form
     {
@@ -34,7 +72,7 @@ class SeriesResource extends Resource
                             ->acceptedFileTypes(['image/*'])
                             ->required()
                             ->disk('public_storage')
-                            ->directory('images/programs')
+                            ->directory('images/Serieses')
                             ->image()
                             ->label('Cover'),
                     ])

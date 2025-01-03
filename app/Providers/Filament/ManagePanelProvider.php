@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Widgets\InfoWidget;
+use Filament\Navigation\NavigationItem;
 use App\Filament\Widgets\StatsWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -19,12 +20,17 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
+use Filament\FontProviders\GoogleFontProvider;
+
+
 
 class ManagePanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->font('Cairo', provider: GoogleFontProvider::class)
             ->default()
             ->id('manage')
             ->path('manage')
@@ -54,8 +60,27 @@ class ManagePanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
+            ->navigationItems([
+                NavigationItem::make('Visit Website')
+                    ->url('/' , true)
+                    ->icon('heroicon-o-globe-alt')
+            ])
+            ->sidebarFullyCollapsibleOnDesktop()
             ->authMiddleware([
                 Authenticate::class,
             ]);
+    }
+
+    public function boot()
+    {
+
+        LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
+            $switch
+                ->locales(['ar','en'])
+                ->flags([
+                    'ar' => asset('flags/sa.svg'),
+                    'en' => asset('flags/gb.svg'),
+                ]);
+        });
     }
 }

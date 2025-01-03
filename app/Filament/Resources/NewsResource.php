@@ -32,6 +32,45 @@ class NewsResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
 
 
+    protected static ?string $activeNavigationIcon = 'heroicon-o-chevron-double-right';
+
+    protected static ?string $navigationGroup = 'News Section';
+
+
+    public static function getNavigationLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'News' : 'الأخبار';
+    }
+
+    public static function getpluralLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'News' : 'الأخبار';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'News' : 'الأخبار';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'News' : 'خبر';
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return app()->getLocale() === 'en' ? 'News Section' : 'القسم الإخباري';
+    }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'success' : 'danger';
+    }
 
     public static function form(Form $form): Form
     {

@@ -19,6 +19,45 @@ class ProgramResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-tv';
 
+    protected static ?string $activeNavigationIcon = 'heroicon-o-chevron-double-right';
+
+
+    public static function getNavigationLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Programs' : 'البرامج';
+    }
+
+    public static function getpluralLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Programs' : 'البرامج';
+    }
+
+    public static function getPluralModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Programs' : 'البرامج';
+    }
+
+    public static function getModelLabel(): string
+    {
+        return app()->getLocale() === 'en' ? 'Program' : 'برنامج';
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return app()->getLocale() === 'en' ? 'Media Section' : 'القسم الإعلامي';
+    }
+
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+    public static function getNavigationBadgeColor(): ?string
+    {
+        return static::getModel()::count() > 0 ? 'success' : 'danger';
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form
@@ -109,7 +148,7 @@ class ProgramResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make()
-                ->label('Edit/Add series')
+                ->label('Edit/Add episodes')
                 ->icon('heroicon-o-pencil'),
 
                 Tables\Actions\ViewAction::make()

@@ -19,12 +19,8 @@ class ChannelsResource extends JsonResource
             'id' => $this->slug,
             'name' => $this->name,
             'logo' => asset('storage/' . $this->logo),
+            'live_url' => $this->live_url
         ];
-
-        if ($request->routeIs('channels.show'))
-        {
-            $data['live_url'] = $this->live_url;
-        }
 
         return $data;
     }

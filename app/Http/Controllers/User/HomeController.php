@@ -8,11 +8,9 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    /**
-     * Handle the incoming request.
-     */
-    public function __invoke(Request $request)
+    public function logout()
     {
-        return view('browse.home');
+        auth()->logout();
+        return redirect()->route('home');
     }
 }

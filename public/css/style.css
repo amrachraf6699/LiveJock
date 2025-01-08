@@ -1,5 +1,5 @@
-/* استيراد خط Cairo */
-/* @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+
 
 /* تعريف ألوان المتغيرات */
 :root {
@@ -16,7 +16,7 @@
 body {
     background-color: var(--main-color);
     color: white;
-    font-family: 'Cairo', sans-serif; /* استخدام خط Cairo */
+    font-family: "Tajawal", serif;
 }
 
 /* Navbar */
@@ -121,4 +121,31 @@ body {
 .movie-card:hover .button {
     opacity: 1;
     transform: scale(1.05);
+}
+
+#search-results {
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.swiper-button-next, .swiper-button-prev {
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover {
+    background-color: #dba235;
+}
+
+.swiper-pagination-bullet-active
+{
+    background: var(--golden-color) !important;   
 }

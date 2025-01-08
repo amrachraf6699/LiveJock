@@ -13,6 +13,13 @@ class News extends Model
 
     public function getCoverUrlAttribute()
     {
-        return asset('storage/' .  $this->attributes['cover']);
+        $coverPath = $this->attributes['cover'];
+    
+        if (file_exists(public_path('storage/' . $coverPath))) {
+            return asset('storage/' . $coverPath);
+        }
+    
+        return "https://ui-avatars.com/api/?name=" . urlencode($this->title) . "&color=7F9CF5&background=EBF4FF";
     }
+    
 }

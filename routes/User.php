@@ -25,9 +25,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('', HomeController::class)->name('browse');
-
-Route::get('films', [FilmsController::class , 'index'])->name('films');
-Route::get('films/{film:slug}', [FilmsController::class , 'show'])->name('films.show');
-
-Route::get('content/{section}', ContentController::class)->name('content');
+Route::get('logout', [HomeController::class , 'logout'])->name('webLogout');

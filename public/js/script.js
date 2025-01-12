@@ -1,27 +1,14 @@
-function toggleNavbar() {
-    var navbarItems = document.getElementById("navbar-items");
-
-    if (navbarItems.style.display === "none" || navbarItems.classList.contains('opacity-0')) {
-        navbarItems.style.display = "flex";
-        setTimeout(function() {
-            navbarItems.classList.remove('opacity-0', 'transform', 'translate-y-4');
-        }, 100);
-    } else {
-        navbarItems.classList.add('opacity-0', 'transform', 'translate-y-4');
-        setTimeout(function() {
-            navbarItems.style.display = "none";
-        }, 500);
-    }
-}
-
 function toggleTopNavbar() {
     const overlay = document.getElementById('overlay');
+    const isHidden = overlay.classList.contains('hidden');
 
-    overlay.classList.toggle('hidden');
-    overlay.classList.toggle('opacity-0');
-    overlay.classList.toggle('opacity-100');
-    overlay.classList.toggle('scale-0');
-    overlay.classList.toggle('scale-100');
+    if (isHidden) {
+        overlay.classList.remove('hidden', 'scale-0', 'opacity-0');
+        overlay.classList.add('scale-100', 'opacity-100', 'translate-x-0'); 
+    } else {
+        overlay.classList.add('hidden', 'scale-0', 'opacity-0');
+        overlay.classList.remove('scale-100', 'opacity-100', 'translate-x-0');
+    }
 }
 
 document.addEventListener("DOMContentLoaded", function() {

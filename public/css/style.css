@@ -19,6 +19,10 @@ body {
     font-family: "Tajawal", serif;
 }
 
+li:hover > ul {
+    display: block;
+}
+
 /* Navbar */
 .navbar {
     background-color: var(--main-color);
@@ -147,5 +151,5 @@ body {
 
 .swiper-pagination-bullet-active
 {
-    background: var(--golden-color) !important;   
+    background: var(--golden-color) !important;
 }

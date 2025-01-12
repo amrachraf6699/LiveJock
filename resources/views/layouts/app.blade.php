@@ -11,91 +11,8 @@
 </head>
 <body>
 
-<!-- Navbar -->
-<nav class="z-10 mb-1 mt-8 navbar bg-[#1d212c] border-2 text-white fixed bottom-1 left-1/2 transform -translate-x-1/2 w-max z-10 rounded-full">
-    <div class="container p-1 flex justify-center items-center space-x-4">
-        <div class="logo flex-shrink-0 cursor-pointer" id="logo" onclick="toggleNavbar()">
-            <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="w-12 h-12 mx-auto">
-        </div>
-
-        <div id="navbar-items" class="flex items-center gap-4 transition-all duration-500 ease-in-out">
-            <!-- Home -->
-            <div class="navbar-item relative group">
-                <a href="{{ request()->routeIs('home') ? '#' : route('home') }}" class="flex items-center {{ request()->routeIs('home') ? 'active' : '' }}">
-                    <i class="bx bx-home text-xl"></i>
-                    <span class="navbar-text absolute left-1/2 transform -translate-x-1/2 -top-10 text-xs bg-gray-800 text-white p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                        الرئيسية
-                    </span>
-                </a>
-            </div>
-
-            <!-- مشاهدة Dropdown -->
-            <div class="navbar-item relative group">
-                <a href="#" class="flex items-center" id="dropdownToggle1">
-                    <i class="bx bx-play-circle text-xl"></i>
-                    <span class="navbar-text absolute left-1/2 transform -translate-x-1/2 -top-10 text-xs bg-gray-800 text-white p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                        مشاهدة
-                    </span>
-                </a>
-                <ul id="dropdownMenu1" class="absolute bottom-full left-0 mb-1 bg-gray-800 text-white text-xs rounded-lg shadow-lg w-32 hidden opacity-0 transform scale-y-75 transition-all duration-300 origin-bottom">
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('channels') }}">قنوات عيش جوك</a></li>
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('films') }}">الأفلام</a></li>
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('podcasts') }}">بودكاست</a></li>
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('programs') }}">البرامج</a></li>
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('serieses') }}">المسلسلات</a></li>
-                    <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('children') }}">عروض الأطفال</a></li>
-                </ul>
-            </div>
-
-            <!-- News -->
-            <div class="navbar-item relative group">
-                <a href="{{ route('news') }}" class="flex items-center">
-                    <i class="bx bx-news text-xl"></i>
-                    <span class="navbar-text absolute left-1/2 transform -translate-x-1/2 -top-10 text-xs bg-gray-800 text-white p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                        الأخبار
-                    </span>
-                </a>
-            </div>
-
-            <!-- الحساب Dropdown -->
-            <div class="navbar-item relative group">
-                <a href="#" class="flex items-center" id="dropdownToggle2">
-                    <i class="bx bx-user text-xl"></i>
-                    <span class="navbar-text absolute left-1/2 transform -translate-x-1/2 -top-10 text-xs bg-gray-800 text-white p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                        الحساب
-                    </span>
-                </a>
-                <ul id="dropdownMenu2" class="absolute bottom-full left-0 mb-1 bg-gray-800 text-white text-xs rounded-lg shadow-lg w-32 hidden opacity-0 transform scale-y-75 transition-all duration-300 origin-bottom">
-                    @auth
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="#">اللغة</a></li>
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="#">سجل المشاهدات</a></li>
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="#">المفضلة</a></li>
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="#">حسابي</a></li>
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="#">المساعدة و الدعم</a></li>
-                        <li class="px-2 py-1 bg-[var(--golden-color)] hover:text-white"><a href="{{ route('webLogout') }}">تسجيل الخروج</a></li>
-                        <li class="px-2 py-1 bg-red-500 hover:text-white"><a href="#">حذف الحساب</a></li>
-                    @else
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('login') }}">تسجيل الدخول</a></li>
-                        <li class="px-2 py-1 hover:bg-gray-700 hover:text-[var(--golden-color)]"><a href="{{ route('register') }}">تسجيل حساب جديد</a></li>
-                    @endauth
-                </ul>
-            </div>
-
-            <!-- Search -->
-            <div class="navbar-item relative group">
-                <a href="{{route('search')}}" class="flex items-center">
-                    <i class="bx bx-search text-xl"></i>
-                    <span class="navbar-text absolute left-1/2 transform -translate-x-1/2 -top-10 text-xs bg-gray-800 text-white p-1 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg">
-                        البحث
-                    </span>
-                </a>
-            </div>
-        </div>
-    </div>
-</nav>
-
 <!-- Top NavBar -->
-<nav class="z-10 mb-6 navbar bg-[#1d212c]  border-2 border-b-0 fixed top-0 left-0 w-full z-10 rounded-b-lg">
+<nav class="z-10 mb-6 navbar bg-[#1d212c] border-b-0 fixed top-0 left-0 w-full z-10 rounded-b-3xl">
     <div class="container p-1 flex justify-between items-center">
         <div class="logo flex-shrink-0 cursor-pointer" id="logo" onclick="toggleTopNavbar()">
             <img src="{{ asset('storage/logo.png') }}" alt="Logo" class="w-16 h-16 mx-auto">
@@ -107,21 +24,36 @@
     </div>
 </nav>
 
-<div id="overlay" class="fixed inset-0 bg-black bg-opacity-75 hidden z-50 transition-transform duration-500 ease-in-out transform scale-0 opacity-0">
+<div id="overlay navbar-items" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 transition-all duration-500 ease-in-out transform scale-0 opacity-0">
     <div class="flex flex-col justify-center items-center h-full space-y-6 text-white">
         <button class="absolute top-5 left-5 text-4xl" onclick="toggleTopNavbar()">
             <i class="bx bx-x"></i>
         </button>
         <ul class="space-y-6 text-xl text-center">
-            <li><a href="{{ route('channels') }}" class="hover:text-[var(--golden-color)]">قنوات عيش جوك</a></li>
-            <li><a href="{{ route('films') }}" class="hover:text-[var(--golden-color)]">الأفلام</a></li>
-            <li><a href="{{ route('podcasts') }}" class="hover:text-[var(--golden-color)]">بودكاست</a></li>
-            <li><a href="{{ route('programs') }}" class="hover:text-[var(--golden-color)]">البرامج</a></li>
-            <li><a href="{{ route('serieses') }}" class="hover:text-[var(--golden-color)]">المسلسلات</a></li>
-            <li><a href="{{ route('children') }}" class="hover:text-[var(--golden-color)]">عروض الأطفال</a></li>
+            <li><a href="{{ route('home') }}" class="hover:text-[var(--golden-color)]">الصفحة الرئيسية</a></li>
+            <li><a href="{{ route('news') }}" class="hover:text-[var(--golden-color)]">الاخبار</a></li>
+            <li><a href="" class="hover:text-[var(--golden-color)]">حسابي</a></li>
+            <li><a href="{{ route('search') }}" class="hover:text-[var(--golden-color)]">البحث</a></li>
+            <li class="relative group cursor-pointer">
+                <span class="block hover:text-[var(--golden-color)]">مشاهدة</span>
+                <ul class="p-1 space-y-2 mt-2 absolute hidden group-hover:block right-full top-[-160px] bg-[#1d212c] rounded-lg shadow-lg w-56 text-sm sm:w-40 sm:text-xs">
+                    <li><a href="{{ route('channels') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">قنوات عيش جوك</a></li>
+                    <hr class="border-t border-gray-700">
+                    <li><a href="{{ route('films') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">الأفلام</a></li>
+                    <hr class="border-t border-gray-700">
+                    <li><a href="{{ route('podcasts') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">بودكاست</a></li>
+                    <hr class="border-t border-gray-700">
+                    <li><a href="{{ route('programs') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">البرامج</a></li>
+                    <hr class="border-t border-gray-700">
+                    <li><a href="{{ route('serieses') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">المسلسلات</a></li>
+                    <hr class="border-t border-gray-700">
+                    <li><a href="{{ route('children') }}" class="block px-4 py-2 hover:text-[var(--golden-color)]">عروض الأطفال</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
+
 
 <!-- Content -->
 @yield('content')
@@ -193,10 +125,10 @@
             <div class="w-full lg:w-1/4">
                 <h6 class="text-lg font-semibold mb-4">حمّل التطبيق من:</h6>
                 <div class="flex space-x-4 rtl:space-x-reverse">
-                    <a href="https://play.google.com/store/apps/details?id=net.rotana" target="_blank" class="block w-32">
+                    <a href="#" target="_blank" class="block w-32">
                         <img src="https://d1rjxhevrfxjk0.cloudfront.net/images/new-img/01.jpg" alt="متجر بلاي" class="w-full">
                     </a>
-                    <a href="https://apps.apple.com/eg/app/rotana-net/id1238137062" target="_blank" class="block w-32">
+                    <a href="#" target="_blank" class="block w-32">
                         <img src="https://d1rjxhevrfxjk0.cloudfront.net/images/new-img/02.jpg" alt="متجر أبل" class="w-full">
                     </a>
                 </div>

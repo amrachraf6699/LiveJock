@@ -56,4 +56,10 @@ class User extends Authenticatable implements FilamentUser
     {
         return $this->is_admin;
     }
+
+    //Watch History
+    public function watchHistories()
+    {
+        return $this->hasMany(WatchHistory::class);
+    }
 }

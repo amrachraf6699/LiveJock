@@ -10,7 +10,7 @@
     "require": {
         "php": "^8.1",
         "bezhansalleh/filament-language-switch": "^3.1",
-        "filament/filament": "3.2",
+        "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.2",
         "kreait/laravel-firebase": "^5.10",
         "laravel-notification-channels/fcm": "^4.5",

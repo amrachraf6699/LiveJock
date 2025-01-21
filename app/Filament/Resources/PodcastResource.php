@@ -76,6 +76,18 @@ class PodcastResource extends Resource
 
                 Forms\Components\Card::make()
                     ->schema([
+                        Forms\Components\Select::make('categories')
+                            ->label('Categories')
+                            ->relationship('categories', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
+                    ])
+                    ->columns(1)
+                    ->label('Manage Categories'),
+
+                Forms\Components\Card::make()
+                    ->schema([
                         Forms\Components\Repeater::make('episodes')
                         ->relationship('episodes')
                         ->schema([
@@ -127,7 +139,22 @@ class PodcastResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Podcast Name')
                     ->searchable(),
-                    Tables\Columns\BadgeColumn::make('episodes_count')
+
+                Tables\Columns\BadgeColumn::make('categories.name')
+                    ->label('Categories')
+                    ->getStateUsing(function ($record) {
+                        return $record->categories->isEmpty() ? 'N/A' : $record->categories->map(function ($category) {
+                            return $category->name;
+                        });
+                    })
+                    ->color(function ($record) {
+                        return $record->categories->isEmpty() ? 'danger' : 'success';
+                    })
+                    ->sortable()
+                    ->searchable(),
+
+
+                Tables\Columns\BadgeColumn::make('episodes_count')
                     ->counts('episodes')
                     ->sortable()
                     ->color(function ($state) {

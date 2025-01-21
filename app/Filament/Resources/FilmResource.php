@@ -76,6 +76,18 @@ class FilmResource extends Resource
                     ->required()
                     ->columnSpanFull(),
 
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Select::make('categories')
+                            ->label('Categories')
+                            ->relationship('categories', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
+                    ])
+                    ->columns(1)
+                    ->label('Manage Categories'),
+
                 Forms\Components\Fieldset::make('Media of Film')
                     ->relationship('file')
                     ->schema([
@@ -120,10 +132,18 @@ class FilmResource extends Resource
                     ->label('Film Name')
                     ->searchable(),
 
-                Tables\Columns\TextColumn::make('file.title')
-                    ->label('Episode Title')
-                    ->searchable()
-                    ->toggleable(),
+                Tables\Columns\BadgeColumn::make('categories.name')
+                    ->label('Categories')
+                    ->getStateUsing(function ($record) {
+                        return $record->categories->isEmpty() ? 'N/A' : $record->categories->map(function ($category) {
+                            return $category->name;
+                        });
+                    })
+                    ->color(function ($record) {
+                        return $record->categories->isEmpty() ? 'danger' : 'success';
+                    })
+                    ->sortable()
+                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created At')

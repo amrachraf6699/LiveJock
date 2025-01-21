@@ -35,4 +35,9 @@ class Child extends Model
     {
         return $this->morphMany(Episode::class, 'episodeable');
     }
+
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categorizable');
+    }
 }

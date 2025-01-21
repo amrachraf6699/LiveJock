@@ -36,5 +36,8 @@ class Film extends Model
         return $this->morphOne(Episode::class, 'episodeable');
     }
 
-
+    public function categories()
+    {
+        return $this->morphToMany(Category::class, 'categorizable');
+    }
 }

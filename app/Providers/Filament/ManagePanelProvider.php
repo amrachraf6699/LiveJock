@@ -62,6 +62,7 @@ class ManagePanelProvider extends PanelProvider
             ])
             ->navigationItems([
                 NavigationItem::make('Visit Website')
+                    ->label(app()->getLocale() == 'ar' ? 'زيارة الموقع' : 'Visit Website')
                     ->url('/' , true)
                     ->icon('heroicon-o-globe-alt')
             ])

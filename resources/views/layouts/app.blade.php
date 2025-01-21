@@ -24,7 +24,7 @@
     </div>
 </nav>
 
-<div id="overlay navbar-items" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 transition-all duration-500 ease-in-out transform scale-0 opacity-0">
+<div  id="overlay-navbar-items" class="fixed inset-0 bg-black bg-opacity-90 hidden z-50 transition-all duration-500 ease-in-out transform scale-0 opacity-0">
     <div class="flex flex-col justify-center items-center h-full space-y-6 text-white">
         <button class="absolute top-5 left-5 text-4xl" onclick="toggleTopNavbar()">
             <i class="bx bx-x"></i>
@@ -55,8 +55,9 @@
 </div>
 
 
-<!-- Content -->
+<!--Start  Content -->
 @yield('content')
+<!--End  Content -->
 
 <footer id="contact" class="bg-gray-900 text-white py-8 pb-20" dir="rtl">
     <div class="container mx-auto px-4">
@@ -126,10 +127,7 @@
                 <h6 class="text-lg font-semibold mb-4">حمّل التطبيق من:</h6>
                 <div class="flex space-x-4 rtl:space-x-reverse">
                     <a href="#" target="_blank" class="block w-32">
-                        <img src="https://d1rjxhevrfxjk0.cloudfront.net/images/new-img/01.jpg" alt="متجر بلاي" class="w-full">
-                    </a>
-                    <a href="#" target="_blank" class="block w-32">
-                        <img src="https://d1rjxhevrfxjk0.cloudfront.net/images/new-img/02.jpg" alt="متجر أبل" class="w-full">
+                        <img src="{{ asset('apps.png') }}" alt="متجر بلاي" class="w-full">
                     </a>
                 </div>
             </div>

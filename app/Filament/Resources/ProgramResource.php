@@ -78,6 +78,19 @@ class ProgramResource extends Resource
                             ->label('Cover'),
                     ])
                     ->columns(1),
+
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Select::make('categories')
+                            ->label('Categories')
+                            ->relationship('categories', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
+                    ])
+                    ->columns(1)
+                    ->label('Manage Categories'),
+
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\Repeater::make('episodes')
@@ -129,6 +142,20 @@ class ProgramResource extends Resource
                     ->label(''),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+
+                Tables\Columns\BadgeColumn::make('categories.name')
+                    ->label('Categories')
+                    ->getStateUsing(function ($record) {
+                        return $record->categories->isEmpty() ? 'N/A' : $record->categories->map(function ($category) {
+                            return $category->name;
+                        });
+                    })
+                    ->color(function ($record) {
+                        return $record->categories->isEmpty() ? 'danger' : 'success';
+                    })
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\BadgeColumn::make('episodes_count')
                     ->counts('episodes')
                     ->sortable()

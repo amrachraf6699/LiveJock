@@ -79,6 +79,19 @@ class ChildResource extends Resource
                             ->label('Cover'),
                     ])
                     ->columns(1),
+
+                Forms\Components\Card::make()
+                    ->schema([
+                        Forms\Components\Select::make('categories')
+                            ->label('Categories')
+                            ->relationship('categories', 'name')
+                            ->multiple()
+                            ->preload()
+                            ->searchable(),
+                    ])
+                    ->columns(1)
+                    ->label('Manage Categories'),
+                    
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\Repeater::make('episodes')
@@ -137,6 +150,21 @@ class ChildResource extends Resource
                     ->color(function ($state) {
                         return $state === 0 ? 'danger' : 'success';
                     }),
+
+
+                Tables\Columns\BadgeColumn::make('categories.name')
+                    ->label('Categories')
+                    ->getStateUsing(function ($record) {
+                        return $record->categories->isEmpty() ? 'N/A' : $record->categories->map(function ($category) {
+                            return $category->name;
+                        });
+                    })
+                    ->color(function ($record) {
+                        return $record->categories->isEmpty() ? 'danger' : 'success';
+                    })
+                    ->sortable()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable(),
